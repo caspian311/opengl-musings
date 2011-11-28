@@ -21,8 +21,8 @@ static void display(void)
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
 
-   draw_maze();
    update_camera();
+   draw_maze();
 
    glutSwapBuffers();
 }

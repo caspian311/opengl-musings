@@ -23,8 +23,6 @@ float rotation_angle = 0;
 
 void update_camera()
 {
-   glMatrixMode(GL_MODELVIEW);
-
    gluLookAt(
          eyeX, eyeY, eyeZ,
          centerX, centerY, centerZ,
