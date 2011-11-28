@@ -7,7 +7,7 @@ TARGET=maze
 all: $(TARGET)
 
 $(TARGET): $(SRC)
-	$(CC) $(FLAGS) $(SRC) -o $(TARGET)
+	$(CC) $(SRC) -o $(TARGET) $(FLAGS)
 
 clean:
 	rm -f $(TARGET)

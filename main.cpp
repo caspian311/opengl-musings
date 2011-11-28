@@ -9,20 +9,17 @@
 
 static void resize(int width, int height)
 {
-   const float ar = (float) width / (float) height;
-
    glViewport(0, 0, width, height);
+
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   glFrustum(-ar, ar, -1.0, 1.0, 2.0, 100.0);
-
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity() ;
+   gluPerspective(45.0f, (float) width / (float) height, 0.01f, 200.0f);
 }
 
 static void display(void)
 {
-   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
 
    draw_maze();
    update_camera();
@@ -37,7 +34,18 @@ static void key(unsigned char key, int x, int y)
    {
       case 27 :
       case 'q':
+         printf("quit...\n");
          exit(0);
+         break;
+      case 'a':
+         printf("turning left...\n");
+
+         turn_left();
+         break;
+      case 'd':
+         printf("turning right...\n");
+
+         turn_right();
          break;
    }
 
@@ -48,7 +56,6 @@ static void idle(void)
 {
    glutPostRedisplay();
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -64,12 +71,12 @@ int main(int argc, char *argv[])
    glutKeyboardFunc(key);
    glutIdleFunc(idle);
 
-   glClearColor(1,1,1,1);
-   glEnable(GL_CULL_FACE);
-   glCullFace(GL_BACK);
+   glClearColor(0, 0, 0, 0);
+   //glEnable(GL_CULL_FACE);
+   //glCullFace(GL_BACK);
 
-   glEnable(GL_DEPTH_TEST);
-   glDepthFunc(GL_LESS);
+   //glEnable(GL_DEPTH_TEST);
+   //glDepthFunc(GL_LESS);
 
    setup_lighting();
 
