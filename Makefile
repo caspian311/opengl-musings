@@ -1,8 +1,13 @@
 
-all: example
+SRC=main.cpp maze.cpp camera.cpp lighting.cpp
+FLAGS=-lglut -lGL -lGLU -lGLEW
+CC=gcc
+TARGET=maze
 
-example: example.cpp
-	gcc -lglut -lGL -lGLU -lGLEW example.cpp -o example  
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(SRC) -o $(TARGET) $(FLAGS)
 
 clean:
-	rm -f example
+	rm -f $(TARGET)
