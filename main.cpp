@@ -28,6 +28,20 @@ static void display(void)
 }
 
 
+static void key(int key, int x, int y)
+{
+   switch(key)
+   {
+      case GLUT_KEY_LEFT:
+         turn_left();
+         break;
+      case GLUT_KEY_RIGHT:
+         turn_right();
+         break;
+   }
+   glutPostRedisplay();
+}
+
 static void key(unsigned char key, int x, int y)
 {
    switch (key)
@@ -38,14 +52,16 @@ static void key(unsigned char key, int x, int y)
          exit(0);
          break;
       case 'a':
-         printf("turning left...\n");
-
-         turn_left();
+         strafe_left();
          break;
       case 'd':
-         printf("turning right...\n");
-
-         turn_right();
+         strafe_right();
+         break;
+      case 'w':
+         move_forward();
+         break;
+      case 's':
+         move_backward();
          break;
    }
 
@@ -69,14 +85,15 @@ int main(int argc, char *argv[])
    glutReshapeFunc(resize);
    glutDisplayFunc(display);
    glutKeyboardFunc(key);
+   glutSpecialFunc(key);
    glutIdleFunc(idle);
 
    glClearColor(0, 0, 0, 0);
    //glEnable(GL_CULL_FACE);
    //glCullFace(GL_BACK);
 
-   //glEnable(GL_DEPTH_TEST);
-   //glDepthFunc(GL_LESS);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LESS);
 
    setup_lighting();
 
