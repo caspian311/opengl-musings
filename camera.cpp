@@ -15,7 +15,7 @@ float eyeY =  1;
 float eyeZ =  10;
 float centerX = 0;
 float centerY = 1;
-float centerZ = 0;
+float centerZ = eyeZ - MOVEMENT_SPEED;
 float upX = 0;
 float upY = 1;
 float upZ = 0;
@@ -86,16 +86,22 @@ void move_backward()
 
 void strafe_left()
 {
-   float angle_in_rads = (rotation_angle + 90) * (PI / 180);
+   float angle_in_rads = (rotation_angle - 90) * (PI / 180);
    eyeX = (MOVEMENT_SPEED * cos(angle_in_rads)) + eyeX;
    eyeZ = (MOVEMENT_SPEED * sin(angle_in_rads)) + eyeZ;
+
+   centerX = (MOVEMENT_SPEED * cos(angle_in_rads)) + centerX;
+   centerZ = (MOVEMENT_SPEED * sin(angle_in_rads)) + centerZ;
 }
 
 void strafe_right()
 {
-   float angle_in_rads = (rotation_angle - 90) * (PI / 180);
+   float angle_in_rads = (rotation_angle + 90) * (PI / 180);
    eyeX = (MOVEMENT_SPEED * cos(angle_in_rads)) + eyeX;
    eyeZ = (MOVEMENT_SPEED * sin(angle_in_rads)) + eyeZ;
+
+   centerX = (MOVEMENT_SPEED * cos(angle_in_rads)) + centerX;
+   centerZ = (MOVEMENT_SPEED * sin(angle_in_rads)) + centerZ;
 }
 
 void log()
