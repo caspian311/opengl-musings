@@ -1,21 +1,12 @@
 #include <GL/glut.h>
-#include <iostream>
-#include <fstream>
-#include <string>
 
-bool has_read_file = false;
-char maze[10][10];
+#include "maze_builder.h"
 
-void build_maze();
-void process_line(std::string line, int line_number);
 void display_maze();
 
 void draw_maze()
 {
-   if (!has_read_file)
-   {
-      build_maze();
-   }
+   build_maze();
 
    display_maze();
 }
@@ -58,30 +49,3 @@ void display_maze()
       glEnd();
    glPopMatrix();
 }
-
-void build_maze()
-{
-   std::string line;
-   std::ifstream maze_file ("data.txt");
-   if (maze_file.is_open())
-   {
-      int line_number =0;
-      while (maze_file.good()) 
-      {
-         std::getline(maze_file, line);
-         process_line(line, line_number);
-         line_number++;
-      }
-   }
-   has_read_file = true;
-}
-
-void process_line(std::string line, int line_number)
-{
-   for (int i=0; i<line.length; i++)
-   {
-      maze[line_number][i] = line[i];
-   }  
-}
-
-
