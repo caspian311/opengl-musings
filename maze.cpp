@@ -74,6 +74,3 @@ void draw_floor()
    glPopMatrix();
 }
 
-void draw_cube()
-{
-}
