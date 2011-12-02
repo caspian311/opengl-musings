@@ -22,6 +22,7 @@ static void display(void)
    glLoadIdentity();
 
    update_camera();
+   setup_lighting();
    draw_maze();
 
    glutSwapBuffers();
@@ -89,13 +90,12 @@ int main(int argc, char *argv[])
    glutIdleFunc(idle);
 
    glClearColor(0, 0, 0, 0);
-   //glEnable(GL_CULL_FACE);
-   //glCullFace(GL_BACK);
+   glEnable(GL_CULL_FACE);
+   glCullFace(GL_BACK);
 
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
 
-   setup_lighting();
 
    glutMainLoop();
 

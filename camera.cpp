@@ -5,7 +5,7 @@
 
 #include "globals.h"
 
-const float ROTATION_SPEED = 1.0f;
+const float ROTATION_SPEED = 5.0f;
 const float MOVEMENT_SPEED = 1.0f;
 
 int screen_width, screen_height;
