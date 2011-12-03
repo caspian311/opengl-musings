@@ -62,6 +62,10 @@ void draw_floor()
 {
    glColor3d(0.5, 0.6, 0.9);
    glPushMatrix();
+      glTranslated(5.0f, -4.5f, 5.0f);
+      //glScaled(1.0f, 0.01f, 1.0f);
+      glutSolidCube(10.0f);
+/*
       glBegin(GL_TRIANGLES);
          glVertex3f(-10.0f, 0.0f,  10.0f); // 1
          glVertex3f( 10.0f, 0.0f,  10.0f); // 2
@@ -71,6 +75,7 @@ void draw_floor()
          glVertex3f( 10.0f, 0.0f, -10.0f); // 3
          glVertex3f(-10.0f, 0.0f, -10.0f); // 4
       glEnd();
+*/
    glPopMatrix();
 }
 
