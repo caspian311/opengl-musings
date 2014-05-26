@@ -1,7 +1,7 @@
 
 SRC=main.cpp maze.cpp camera.cpp lighting.cpp maze_builder.cpp
 FLAGS=-lglut -lGL -lGLU -lGLEW
-CC=gcc
+CC=g++
 TARGET=maze
 
 all: $(TARGET)
