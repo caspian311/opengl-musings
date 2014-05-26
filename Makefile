@@ -2,7 +2,7 @@
 SRC=main.cpp 
 FLAGS=-lglut -lGL -lGLU -lGLEW
 CC=g++
-TARGET=maze
+TARGET=app
 
 all: $(TARGET)
 
