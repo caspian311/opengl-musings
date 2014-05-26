@@ -1,5 +1,5 @@
 
-SRC=main.cpp maze.cpp camera.cpp lighting.cpp maze_builder.cpp
+SRC=main.cpp 
 FLAGS=-lglut -lGL -lGLU -lGLEW
 CC=g++
 TARGET=maze

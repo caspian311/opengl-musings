@@ -1,104 +1,36 @@
-#include <GL/glut.h>
+#include "GL/freeglut.h"
+#include "GL/gl.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "camera.h"
-#include "maze.h"
-#include "lighting.h"
-
-static void resize(int width, int height)
+/* display function - code from:
+     http://fly.cc.fer.hr/~unreal/theredbook/chapter01.html
+This is the actual usage of the OpenGL library. 
+The following code is the same for any platform */
+void renderFunction()
 {
-   glViewport(0, 0, width, height);
-
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   gluPerspective(45.0f, (float) width / (float) height, 0.01f, 200.0f);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 1.0, 1.0);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.5, -0.5);
+        glVertex2f(-0.5, 0.5);
+        glVertex2f(0.5, 0.5);
+        glVertex2f(0.5, -0.5);
+    glEnd();
+    glFlush();
 }
 
-static void display(void)
+/* Main method - main entry point of application
+the freeglut library does the window creation work for us, 
+regardless of the platform. */
+int main(int argc, char** argv)
 {
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
-
-   update_camera();
-   setup_lighting();
-   draw_maze();
-
-   glutSwapBuffers();
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE);
+    glutInitWindowSize(500,500);
+    glutInitWindowPosition(100,100);
+    glutCreateWindow("OpenGL - First window demo");
+    glutDisplayFunc(renderFunction);
+    glutMainLoop();    
+    return 0;
 }
-
-
-static void key(int key, int x, int y)
-{
-   switch(key)
-   {
-      case GLUT_KEY_LEFT:
-         turn_left();
-         break;
-      case GLUT_KEY_RIGHT:
-         turn_right();
-         break;
-   }
-   glutPostRedisplay();
-}
-
-static void key(unsigned char key, int x, int y)
-{
-   switch (key)
-   {
-      case 27 :
-      case 'q':
-         printf("quit...\n");
-         exit(0);
-         break;
-      case 'a':
-         strafe_left();
-         break;
-      case 'd':
-         strafe_right();
-         break;
-      case 'w':
-         move_forward();
-         break;
-      case 's':
-         move_backward();
-         break;
-   }
-
-   glutPostRedisplay();
-}
-
-static void idle(void)
-{
-   glutPostRedisplay();
-}
-
-int main(int argc, char *argv[])
-{
-   glutInit(&argc, argv);
-   glutInitWindowSize(640,480);
-   glutInitWindowPosition(10,10);
-   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-
-   glutCreateWindow("Maze");
-
-   glutReshapeFunc(resize);
-   glutDisplayFunc(display);
-   glutKeyboardFunc(key);
-   glutSpecialFunc(key);
-   glutIdleFunc(idle);
-
-   glClearColor(0, 0, 0, 0);
-   glEnable(GL_CULL_FACE);
-   glCullFace(GL_BACK);
-
-   glEnable(GL_DEPTH_TEST);
-   glDepthFunc(GL_LESS);
-
-
-   glutMainLoop();
-
-   return EXIT_SUCCESS;
-}
-
